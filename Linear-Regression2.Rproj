@@ -1,0 +1,189 @@
+# VIDEO 2
+
+
+###  VERY IMPORTANT FUNCTIONS   ###
+# e means element f means function s means sample code 
+e1=c(44,32,53,22,45)
+e2=c(45,33,23,66,77)
+e3=c("aa","bb","cc","dd","ee")
+e4=c(56,"ff",89,NA,"gg")
+
+f1=sort(e1)     # sort() for sorting
+f2=order(e1)    # order() to get the index of the numbers 
+                # in increasing order.
+f3=which.max(e1)# which.max() gives the index of max no.
+
+s1=e1<40
+
+f4=which(s1)    # returns the entry of the logical vector 
+                # that are true
+f5=match(c(53,45,33),e1) # looks for enteries in a vector
+                # and return the index needed to acccess them
+#  Rather than the index if we want to know if each element 
+#  of the first vector is in the second vector we use the 
+#  function %in%
+f6=c(53,45,33) %in% e1
+f7=rank(e1)     # rank() gives the index in the same order 
+                # as in the vector.
+f8=ls()         # gives the name of all variables used 
+                # in particular session
+f9=data.frame(e1,e2)
+f10=data.frame(e1,e3,e1,e2,e3)
+
+s2=e1[s1]       # returns only those element that has true 
+                # index
+s3=sum(s1)      # returns the no. of element that are less
+                # than 40
+s4= TRUE & FALSE
+
+
+
+
+# dplyr package provides intutive functionality for working 
+# with table.
+library(dplyr)
+
+
+f11=mutate(f10,e1)   # mutate() means join  function works only when first argument has more
+#  than one columns (should be a data table and not vector) and second parameter has one column.
+
+
+f12=filter(f10,e1>35)   # filter()  takes data table as the first argument and condition
+#  as the second.
+
+f13=select(f10,e2,e3.1) # select()  Its first argument is data set. From second argument
+# mention those column names which u want to keep in the given variable.
+
+# pipe operator.........put all together
+f10 %>% select(e2,e3.1) %>%filter(e1>35)
+e1%in%e2
+
+
+# CONDITIONAL STATEMENTS
+
+f14=sum(is.na(e4))
+f15=ifelse(is.na(e4),0,e4)  # Replaces all the missing values with 0.
+
+
+#  Function
+#  x is any variable
+avg=function(x){s=sum(x)
+                     n=length(x)
+                     s/n}
+
+#  for loops
+for(i in 1:5)
+  {print(i)
+}
+
+
+# Some important functions
+# apply(),sapply(),tapply(),mapply(),split(),cut(),quantile(),reduce()
+
+# Basic Calculations
+8*6
+2^16
+2^
+8*6
+8*10
+
+# Functions
+sqrt(2)
+abs(-65)
+?sqrt
+
+# Variables
+SquareRoot2 = sqrt(2)
+SquareRoot2
+HoursYear <- 365*24
+HoursYear
+ls()
+
+
+
+# VIDEO 3 
+
+# Vectors
+c(2,3,5,8,13)
+Country = c("Brazil", "China", "India","Switzerland","USA")
+LifeExpectancy = c(74,76,65,83,79)
+Country
+LifeExpectancy
+Country[1]
+LifeExpectancy[3]
+Sequence = seq(0,100,2)
+Sequence
+
+# Data Frames
+CountryData = data.frame(Country, LifeExpectancy)
+CountryData
+CountryData$Population = c(199000,1390000,1240000,7997,318000)
+CountryData
+Country = c("Australia","Greece")
+LifeExpectancy = c(82,81)
+Population = c(23050,11125)
+NewCountryData = data.frame(Country, LifeExpectancy, Population)
+NewCountryData
+AllCountryData = rbind(CountryData, NewCountryData)
+AllCountryData
+
+
+# VIDEO 4
+
+# Loading csv files                
+WHO = read.csv("WHO.csv")
+str(WHO)
+summary(WHO)
+
+# Subsetting
+WHO_Europe = subset(WHO, Region == "Europe")
+str(WHO_Europe)
+
+# Writing csv files
+write.csv(WHO_Europe, "WHO_Europe.csv")
+
+# Removing variables
+rm(WHO_Europe)
+
+
+# VIDEO 5
+
+# Basic data analysis 
+
+mean(WHO$Under15)
+sd(WHO$Under15)
+summary(WHO$Under15)
+
+which.min(WHO$Under15)
+WHO$Country[86]
+
+which.max(WHO$Under15)
+WHO$Country[124]
+
+# Scatterplot
+plot(WHO$GNI, WHO$FertilityRate)
+
+# Subsetting
+Outliers = subset(WHO, GNI > 10000 & FertilityRate > 2.5) 
+nrow(Outliers)
+Outliers[c("Country","GNI","FertilityRate")]
+
+
+# VIDEO 6
+
+# Histograms
+hist(WHO$CellularSubscribers)
+
+# Boxplot
+boxplot(WHO$LifeExpectancy ~ WHO$Region)
+
+boxplot(WHO$LifeExpectancy ~ WHO$Region, xlab = "", ylab = "Life Expectancy", main = "Life Expectancy of Countries by Region")
+
+# Summary Tables
+table(WHO$Region)
+
+tapply(WHO$Over60, WHO$Region, mean)
+tapply(WHO$LiteracyRate, WHO$Region, min)
+tapply(WHO$LiteracyRate, WHO$Region, min, na.rm=TRUE)
+help("length")
+ 
